@@ -30,7 +30,7 @@ const getMatrix = (meta = '', source = alphabets) => {
     return alphabets[meta?.trim()?.toUpperCase()];
 };
 
-const horizontal = async (text = '', slowBy = 0) => {
+const horizontal = async (text = '', symbol = '-', slowBy = 0) => {
     const reqMatrix = [];
     const reqMatrixOfText = [];
     for (let i = 0; i < text?.length; i++) {
@@ -45,13 +45,13 @@ const horizontal = async (text = '', slowBy = 0) => {
         reqMatrix?.push(data);
     };
 
-    await makePattern(reqMatrix, '%%', slowBy);
+    await makePattern(reqMatrix, symbol, slowBy);
 }
 
-const vertical = async (text = '', slowBy = 0) => {
+const vertical = async (text = '', symbol = '-', slowBy = 0) => {
     for (let i = 0; i < text?.length; i++) {
         const reqMatrix = getMatrix(text[i]);
-        await makePattern(reqMatrix, '##', slowBy);
+        await makePattern(reqMatrix, symbol, slowBy);
         process?.stdout?.write('\n');
     }
 }
@@ -59,5 +59,5 @@ const vertical = async (text = '', slowBy = 0) => {
 
 export const loader = async () => {
     const loadingText = 'Hola !!';
-    await horizontal(loadingText);
+    await horizontal(loadingText, '%%', 20);
 };
